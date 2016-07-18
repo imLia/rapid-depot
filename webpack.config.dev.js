@@ -22,6 +22,13 @@ export default {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'client'),
+        loaders: ['react-hot','babel']
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
         include: path.join(__dirname, 'client'),
         loaders: ['react-hot','babel']
       },
@@ -32,6 +39,6 @@ export default {
     ]
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   }
 }

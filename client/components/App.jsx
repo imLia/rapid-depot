@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-// import '../styles/app.scss'
 import Logo from './logo/Logo';
 import SearchBox from './search/SearchBox';
 
