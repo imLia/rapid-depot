@@ -12,13 +12,13 @@ export default (_args) => {
           </label>
           <input className="input-group-field" type="text" />
           <span className="input-group-button">
-            <button className="button" data-toggle="partnerResults" aria-controls="partnerResults" onClick={args.search}>
+            <button className="button" data-id="partnerResults" onClick={args.search}>
               Submit
             </button>
           </span>
         </div>
       </fieldset>
-      <fieldset className={args.poContent} id="search-by-po" role="tabpanel" aria-hidden="true" aria-labelledby="search-by-po-label">
+      <fieldset className={args.poContent} data-id="search-by-po" onClick={args.search}>
         <div className="input-group">
           <label className="input-group-label">
             P.O. Number
@@ -31,7 +31,7 @@ export default (_args) => {
           </span>
         </div>
       </fieldset>
-      <fieldset className={args.skuContent} id="search-by-sku" role="tabpanel" aria-hidden="false" aria-labelledby="search-by-sku-label">
+      <fieldset className={args.skuContent} data-id="search-by-sku" onClick={args.search}>
         <div className="input-group">
           <label className="input-group-label">
             SKU
