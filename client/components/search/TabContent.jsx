@@ -12,7 +12,7 @@ export default (_args) => {
           </label>
           <input className="input-group-field" type="text" />
           <span className="input-group-button">
-            <button className="button" data-toggle="partnerResults" aria-controls="partnerResults">
+            <button className="button" data-toggle="partnerResults" aria-controls="partnerResults" onClick={args.search}>
               Submit
             </button>
           </span>
@@ -38,7 +38,7 @@ export default (_args) => {
           </label>
           <input className="input-group-field" type="text" />
           <span className="input-group-button">
-            <button className="button" data-toggle="poResults" aria-controls="poResults" onClick={args.search}>
+            <button className="button" data-toggle="poResults" aria-controls="poResults">
               Submit
             </button>
           </span>
