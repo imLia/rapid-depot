@@ -2,8 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 
 import App from './components/App';
-import ResultHeader from './components/search/result/SearchResult';
-import InitiateReceipt from './components/initiate_receipt/menu/MenuBar';
+import InitiateReceipt from './components/initiate_receipt/content/InboundReceiptBox';
 
 export default (
   <Route>

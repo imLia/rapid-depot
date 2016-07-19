@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 export default () => {
   return (
     <div className='menu-wizard top-bar' data-sticky-container='data-sticky-container'>
