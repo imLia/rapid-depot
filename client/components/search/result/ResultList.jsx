@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+
 export default class ResultList extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ export default class ResultList extends Component {
     return (
       <li className="result" data-accordion-item="data-accordion-item">
         <a className="accordion-title">
-          Acme Manufacturing Company
+          Acme Manufacturing Company1
         </a>
         <ul className="po-list">
           <li>
@@ -60,7 +61,7 @@ export default class ResultList extends Component {
 
   render() {
     let listType = this.props.searhType === 'partner' ? this.nestedList() : this.list();
-    
+
     return (
       <article className="results">
         <ul className="results-list">
