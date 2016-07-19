@@ -5,7 +5,7 @@ import POHeader from './POHeader';
 import POContent from './POContent';
 
 
-export default class ResultList extends Component {
+export default class InitiateReceipt extends Component {
   render() {
     return (
       <div>
