@@ -6,21 +6,21 @@ export default class PartnerBasicInfo extends Component {
     return (
       <aside className='partnerBasicInfo'>
         <h4>Partner Name</h4>
-        <p>{this.props.partnerName}</p>
+        <p>{this.props.partnerBasicInfo.partnerName}</p>
         <h4>P.O.#:</h4>
-        <p>1337123</p>
+        <p>{this.props.partnerBasicInfo.poNumber}</p>
         <h4>Date:</h4>
-        <time>July 14, 2016</time>
+        <time>{this.props.partnerBasicInfo.currentDate}</time>
         <fieldset>
           <label>
             Time Started
             <time>
-              8:00 P.M.
+              {this.props.partnerBasicInfo.timeStarted}
             </time>
           </label>
           <label>
             Time Arrived
-            <input id='timeArrived' type='text' />
+            <input id='timeArrived' type='text' value={this.props.partnerBasicInfo.timeArrived}/>
           </label>
           <div className='input-group'>
             <label className='input-group-label'>
@@ -48,7 +48,7 @@ export default class PartnerBasicInfo extends Component {
               Total Scanned
             </h4>
             <p>
-              55
+              {this.props.partnerBasicInfo.totalScanned}
             </p>
           </div>
           <div className='excess callout alert'>
@@ -56,7 +56,7 @@ export default class PartnerBasicInfo extends Component {
               Excess
             </h4>
             <p>
-              0
+              {this.props.partnerBasicInfo.excess}
             </p>
           </div>
         </div>

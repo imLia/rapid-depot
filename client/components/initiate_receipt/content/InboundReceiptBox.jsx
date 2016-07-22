@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import MenuBar from '../menu/MenuBar';
 import POHeader from './POHeader';
-import POContent from './POContent';
+import PartnerBasicInfo from './PartnerBasicInfo';
+import ReceiptInfo from './ReceiptInfo';
 
 
 export default class InitiateReceipt extends Component {
@@ -10,12 +11,12 @@ export default class InitiateReceipt extends Component {
     super(props);
     this.state = {
       partnerName: 'Payless',
-      poNumber: '',
-      currentDate: '',
-      timeStarted: '',
-      timeArrived: '',
-      totalScanned: '',
-      excess: ''
+      poNumber: '1337123',
+      currentDate: 'July 14, 2016',
+      timeStarted: '8:00 P.M',
+      timeArrived: '7:00 A.M',
+      totalScanned: '55',
+      excess: '0'
     }
   }
   render() {
@@ -26,7 +27,12 @@ export default class InitiateReceipt extends Component {
           <div className='inbound-receipt'>
             <div className='poProper'>
               <POHeader />
-              <POContent partnerName={this.state.partnerName} />
+              <section className='poContent'>
+                <div className='poDetails'>
+                  <PartnerBasicInfo partnerBasicInfo={this.state} />
+                  <ReceiptInfo />
+                </div>
+              </section>
             </div>
           </div>
         </section>
