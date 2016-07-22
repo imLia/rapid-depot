@@ -24,70 +24,24 @@ export default class ReceiptInfo extends Component {
               </td>
               <td>10</td>
               <td>
-                <input type='number' />
+                <input
+                  type='number'
+                  value={this.props.ReceiptInfo.macBookState}
+                  onChange={this.props.handleMacbookChange}
+                  />
               </td>
             </tr>
             <tr>
               <td>ABDD23234</td>
               <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
+              <td>Android</td>
               <td>10</td>
               <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
-              </td>
-            </tr>
-            <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
-              <td>13" MacBook Pro 256GB</td>
-              <td>10</td>
-              <td>
-                <input type='number' />
+                <input
+                  type='number'
+                  value={this.props.ReceiptInfo.androidState}
+                  onChange={this.props.handleAndroidState}
+                />
               </td>
             </tr>
           </tbody>

@@ -20,7 +20,12 @@ export default class PartnerBasicInfo extends Component {
           </label>
           <label>
             Time Arrived
-            <input id='timeArrived' type='text' value={this.props.partnerBasicInfo.timeArrived}/>
+            <input
+              id='timeArrived'
+              type='text'
+              value={this.props.partnerBasicInfo.timeArrived}
+              onChange={this.props.handleTextBoxChange}
+              />
           </label>
           <div className='input-group'>
             <label className='input-group-label'>
