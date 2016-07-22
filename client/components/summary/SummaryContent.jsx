@@ -8,7 +8,7 @@ export default class POContent extends Component {
     return (
       <section className='poContent'>
         <div className='poDetails'>
-          <PartnerBasicInfo partnerName={this.props.partnerName}/>
+          <PartnerBasicInfo />
           <ReceiptInfo />
         </div>
       </section>

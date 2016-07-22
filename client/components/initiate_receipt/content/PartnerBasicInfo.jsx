@@ -6,15 +6,15 @@ export default class PartnerBasicInfo extends Component {
     return (
       <aside className='partnerBasicInfo'>
         <h4>Partner Name</h4>
-        <p>ACME Toy Company</p>
+        <p>{this.props.partnerName}</p>
         <h4>P.O.#:</h4>
         <p>1337123</p>
         <h4>Date:</h4>
-        <time datetime='2016-07-14'>July 14, 2016</time>
+        <time>July 14, 2016</time>
         <fieldset>
           <label>
             Time Started
-            <time datetime='20:00'>
+            <time>
               8:00 P.M.
             </time>
           </label>
