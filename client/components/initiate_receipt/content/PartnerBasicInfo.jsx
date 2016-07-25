@@ -53,7 +53,8 @@ export default class PartnerBasicInfo extends Component {
               Total Scanned
             </h4>
             <p>
-              {this.props.partnerBasicInfo.totalScanned}
+              {this.props.totalScanned}
+              {/*this.props.partnerBasicInfo.totalScanned*/}
             </p>
           </div>
           <div className='excess callout alert'>
