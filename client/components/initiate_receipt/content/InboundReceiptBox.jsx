@@ -36,7 +36,8 @@ export default class InitiateReceipt extends Component {
       currentUpc: '',
       upc: {
         '4800067450871': 'item1',
-        '2': 'item2'
+        quantity: '2',
+        'a': 'item2'
       }
     };
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
@@ -61,7 +62,11 @@ export default class InitiateReceipt extends Component {
       })
     } else {
       if (this.state.currentUpc in this.state.upc) {
-        console.log('Found matched upc, add one to its quantity')
+        let quantity = parseInt(this.state.upc.quantity) + 1
+        this.setState({
+          quantity: quantity
+        })
+        console.log(this.state.upc.quantity)
       } else {
           console.log('UPC is not found');
       }
