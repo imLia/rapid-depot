@@ -5,6 +5,7 @@ import POHeader from './POHeader';
 import PartnerBasicInfo from './PartnerBasicInfo';
 import ReceiptInfo from './ReceiptInfo';
 
+let currentUpc = '';
 
 export default class InitiateReceipt extends Component {
   constructor(props){
@@ -21,7 +22,6 @@ export default class InitiateReceipt extends Component {
     let currentTime = hoursOf12 + ":" + minutes + " " + period;
 
 
-
     this.state = {
       partnerName: 'Payless',
       poNumber: '1337123',
@@ -31,22 +31,42 @@ export default class InitiateReceipt extends Component {
       excess: 0,
       macBookState: 1,
       androidState: 2,
-      totalScanned: 0
+      totalScanned: 0,
+
+      currentUpc: '',
+      upc: {
+        '4800067450871': 'item1',
+        '2': 'item2'
+      }
     };
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
     this.handleMacbookChange = this.handleMacbookChange.bind(this);
     this.handleAndroidState = this.handleAndroidState.bind(this);
+    this.customMethod = this.customMethod.bind(this);
     //this.updatedScanned = this.updatedScanned.bind(this);
     // this.barcode = this.barcode.bind(this);
   }
 
-  // componentDidMount() {
-  //  let totalScanned = parseInt(this.state.macBookState) + parseInt(this.state.androidState);
-  //  this.setState({
-  //    totalScanned: totalScanned
-  //   })
-  //  }
+  componentDidMount(){
+    document.body.addEventListener('keydown', this.customMethod)
+  }
 
+  customMethod(e) {
+
+    if (e.code !== 'Enter' && e.code !== 'ShiftLeft') {
+      let arr = ['4','8','0','0','6']
+
+      this.setState({
+        currentUpc: this.state.currentUpc += e.key
+      })
+    } else {
+      if (this.state.currentUpc in this.state.upc) {
+        console.log('Found matched upc, add one to its quantity')
+      } else {
+          console.log('UPC is not found');
+      }
+    }
+  }
 
   handleTextBoxChange(e) {
     this.setState({
@@ -91,7 +111,7 @@ export default class InitiateReceipt extends Component {
   render() {
     // console.log(parseInt(this.state.macBookState));
     // console.log(parseInt(this.state.androidState));
-
+    // console.log(this.state.currentUpc in this.state.upc);
 
     return (
       <div onKeyDown={this.barcode}>
