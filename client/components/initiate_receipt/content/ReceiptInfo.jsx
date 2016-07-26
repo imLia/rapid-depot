@@ -17,12 +17,12 @@ export default class ReceiptInfo extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
+              <td>{this.props.ReceiptInfo.upc.item1}</td>
+              <td>{this.props.ReceiptInfo.macBookupc}</td>
               <td>
                 13" MacBook Pro 256GB
               </td>
-              <td>10</td>
+              <td>{this.props.ReceiptInfo.statedQuantity}</td>
               <td>
                 <input
                   type='number'
@@ -32,10 +32,10 @@ export default class ReceiptInfo extends Component {
               </td>
             </tr>
             <tr>
-              <td>ABDD23234</td>
-              <td>ABDE98374923</td>
+              <td>{this.props.ReceiptInfo.androidSku}</td>
+              <td>{this.props.ReceiptInfo.androidupc}</td>
               <td>Android</td>
-              <td>10</td>
+              <td>{this.props.ReceiptInfo.statedQuantity}</td>
               <td>
                 <input
                   type='number'

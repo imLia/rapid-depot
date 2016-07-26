@@ -11,34 +11,48 @@ export default class InitiateReceipt extends Component {
   constructor(props){
     super(props);
 
-    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
-      "September", "October", "November", "December"];
     let newDate = new Date();
-    let currentDate = monthNames[newDate.getMonth()] + " " + newDate.getDate()+ ", " + newDate.getFullYear();
+    function currentDate () {
+      let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
+        "September", "October", "November", "December"];
 
-    let period = newDate.getHours() <= 12 ?  'A.M' : 'P.M';
-    let hoursOf12 = newDate.getHours() >= 12  ? newDate.getHours() - 12 : newDate.getHours();
-    let minutes = (newDate.getMinutes()< 10 ? '0':'') + newDate.getMinutes() ;
-    let currentTime = hoursOf12 + ":" + minutes + " " + period;
+      return monthNames[newDate.getMonth()] + " " + newDate.getDate()+ ", " + newDate.getFullYear();
+    }
+
+    function currentTime() {
+      let period = newDate.getHours() <= 12 ?  'A.M' : 'P.M';
+      let hoursOf12 = newDate.getHours() >= 12  ? newDate.getHours() - 12 : newDate.getHours();
+      let minutes = (newDate.getMinutes()< 10 ? '0':'') + newDate.getMinutes() ;
+
+      return  hoursOf12 + ":" + minutes + " " + period;
+    }
+
 
 
     this.state = {
       partnerName: 'Payless',
       poNumber: '1337123',
-      currentDate: currentDate,
-      timeStarted: currentTime,
+      currentDate: currentDate(),
+      timeStarted: currentTime(),
       timeArrived: '7:00 A.M',
       excess: 0,
-      macBookState: 1,
-      androidState: 2,
+      macBookState: 0,
+      androidState: 0,
       totalScanned: 0,
+
+      macBookSku: '480006745',
+      androidSku: '471142185',
+
+      macBookupc: '4800067450871',
+      androidupc: '4711421853422',
+
+      statedQuantity: 10,
 
       currentUpc: '',
       upc: {
         '4800067450871': 'item1',
         '4711421853422': 'item2',
-        quantity: 1,
-        'a': 'item2'
+        'quantity': 0,
       }
     };
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
@@ -65,7 +79,7 @@ export default class InitiateReceipt extends Component {
         let currentQty = this.state.upc.quantity += 1;
         // console.log(this.state.upc.quantity);
         this.setState({
-          quantity:  currentQty,//,this.state.upc.quantity += 1,
+          quantity:  currentQty,//this.state.upc.quantity += 1
           currentUpc: ''
         })
         console.log(this.state.upc.quantity);
@@ -76,6 +90,10 @@ export default class InitiateReceipt extends Component {
           })
       }
     }
+  }
+
+  componentDidUpdate(){
+
   }
 
   handleTextBoxChange(e) {
