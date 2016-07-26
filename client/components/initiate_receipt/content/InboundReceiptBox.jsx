@@ -7,7 +7,6 @@ import ReceiptInfo from './ReceiptInfo';
 
 let currentUpc = '';
 
-
 export default class InitiateReceipt extends Component {
   constructor(props){
     super(props);
@@ -38,7 +37,7 @@ export default class InitiateReceipt extends Component {
       upc: {
         '4800067450871': 'item1',
         '4711421853422': 'item2',
-        quantity: 0,
+        quantity: 1,
         'a': 'item2'
       }
     };
@@ -66,12 +65,15 @@ export default class InitiateReceipt extends Component {
         let currentQty = this.state.upc.quantity += 1;
         // console.log(this.state.upc.quantity);
         this.setState({
-          quantity:  currentQty, //this.state.upc.quantity += 1,
+          quantity:  currentQty,//,this.state.upc.quantity += 1,
           currentUpc: ''
         })
-        console.log(this.state.upc.quantity)
+        console.log(this.state.upc.quantity);
       } else {
           console.log('UPC is not found');
+          this.setState({
+            currentUpc: ''
+          })
       }
     }
   }
@@ -120,6 +122,7 @@ export default class InitiateReceipt extends Component {
     // console.log(parseInt(this.state.macBookState));
     // console.log(parseInt(this.state.androidState));
     // console.log(this.state.currentUpc in this.state.upc);
+    // totalScanned = {parseInt(this.state.macBookState) + parseInt(this.state.androidState)}
 
     return (
       <div onKeyDown={this.barcode}>
@@ -133,7 +136,7 @@ export default class InitiateReceipt extends Component {
                   <PartnerBasicInfo
                     partnerBasicInfo={this.state}
                     handleTextBoxChange={this.handleTextBoxChange}
-                    totalScanned = {parseInt(this.state.macBookState) + parseInt(this.state.androidState)}
+                    totalScanned = {this.state.upc.quantity}
 
                   />
                   <ReceiptInfo
