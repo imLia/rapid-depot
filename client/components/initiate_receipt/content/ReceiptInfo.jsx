@@ -3,6 +3,9 @@ import React, {Component} from 'react';
 
 export default class ReceiptInfo extends Component {
   render() {
+    var macbook = this.props.ReceiptInfo.upc[4800067450871];
+    var android = this.props.ReceiptInfo.upc[4711421853422];
+
     return (
       <div className='receiptInfo'>
         <table>
@@ -17,31 +20,31 @@ export default class ReceiptInfo extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>{this.props.ReceiptInfo.upc.item1}</td>
-              <td>{this.props.ReceiptInfo.macBookupc}</td>
+              <td>{macbook.sku}</td>
+              <td>{macbook.upc}</td>
               <td>
-                13" MacBook Pro 256GB
+                {macbook.description}
               </td>
-              <td>{this.props.ReceiptInfo.statedQuantity}</td>
+              <td>{macbook.statedQuantity}</td>
               <td>
                 <input
                   type='number'
-                  value={this.props.ReceiptInfo.macBookState}
+                  value={macbook.balance}
                   onChange={this.props.handleMacbookChange}
                   />
               </td>
             </tr>
             <tr>
-              <td>{this.props.ReceiptInfo.androidSku}</td>
-              <td>{this.props.ReceiptInfo.androidupc}</td>
-              <td>Android</td>
-              <td>{this.props.ReceiptInfo.statedQuantity}</td>
+              <td>{android.sku}</td>
+              <td>{android.upc}</td>
+              <td>{android.description}</td>
+              <td>{android.statedQuantity}</td>
               <td>
                 <input
                   type='number'
-                  value={this.props.ReceiptInfo.androidState}
+                  value={android.balance}
                   onChange={this.props.handleAndroidState}
-                />
+                  />
               </td>
             </tr>
           </tbody>

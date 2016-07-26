@@ -40,26 +40,31 @@ export default class InitiateReceipt extends Component {
       androidState: 0,
       totalScanned: 0,
 
-      macBookSku: '480006745',
-      androidSku: '471142185',
-
-      macBookupc: '4800067450871',
-      androidupc: '4711421853422',
-
-      statedQuantity: 10,
-
       currentUpc: '',
       upc: {
-        '4800067450871': 'item1',
-        '4711421853422': 'item2',
-        'quantity': 0,
+        '4800067450871': {
+          'sku': '4548000674',
+          'upc': '4800067450871',
+          'description': '13" MacBook Pro 256GB',
+          'statedQuantity':  10,
+          'balance': 0,
+          quantityScanned: 0
+        },
+        '4711421853422': {
+          'sku': '45447422',
+          'upc': '4711421853422',
+          'description': 'android',
+          'statedQuantity':  11,
+          'balance': 0,
+          quantityScanned: 0
+        }
       }
     };
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
     this.handleMacbookChange = this.handleMacbookChange.bind(this);
-    this.handleAndroidState = this.handleAndroidState.bind(this);
+    // this.handleAndroidState = this.handleAndroidState.bind(this);
     this.customMethod = this.customMethod.bind(this);
-    //this.updatedScanned = this.updatedScanned.bind(this);
+    // this.updatedScanned = this.updatedScanned.bind(this);
     // this.barcode = this.barcode.bind(this);
   }
 
@@ -76,13 +81,28 @@ export default class InitiateReceipt extends Component {
       })
     } else {
       if (this.state.currentUpc in this.state.upc) {
-        let currentQty = this.state.upc.quantity += 1;
-        // console.log(this.state.upc.quantity);
-        this.setState({
-          quantity:  currentQty,//this.state.upc.quantity += 1
-          currentUpc: ''
-        })
-        console.log(this.state.upc.quantity);
+        let macbook =  this.state.upc[4800067450871];
+        let android = this.state.upc[4711421853422];
+        if(this.state.currentUpc == android.upc){
+          let currentQty = android.balance += 1;
+          // console.log(this.state.upc.quantity);
+          this.setState({
+            balance:  currentQty,//this.state.upc.quantity += 1
+            currentUpc: ''
+          })
+          console.log(android.balance);
+        }
+        else if(this.state.currentUpc == macbook.upc){
+          let currentQty = macbook.balance += 1;
+          // let total = this.state.totalScanned + currentQty;
+          // console.log(this.state.upc.quantity);
+          this.setState({
+            balance:  currentQty,//this.state.upc.quantity += 1
+            currentUpc: ''
+            // totalScanned: total
+          })
+          console.log(macbook.balance);
+        }
       } else {
           console.log('UPC is not found');
           this.setState({
@@ -92,9 +112,12 @@ export default class InitiateReceipt extends Component {
     }
   }
 
-  componentDidUpdate(){
-
-  }
+  // componentDidUpdate(){
+  //   this.setState({
+  //     totalScanned: this.state.upc[4800067450871].balance + this.state.upc[4711421853422].balance
+  //   })
+  //
+  // }
 
   handleTextBoxChange(e) {
     this.setState({
@@ -104,16 +127,28 @@ export default class InitiateReceipt extends Component {
 
   handleMacbookChange(e) {
     this.setState({
-      macBookState: e.target.value
+      upc: {
+        '4800067450871' : {
+          'sku': '4548000674',
+          'upc': '4800067450871',
+          'description': '13" MacBook Pro 256GB',
+          'statedQuantity':  10,
+          'balance': e.target.value
+          // quantityScanned: 0
+        },
+        '4711421853422': {
+          'sku': '45447422',
+          'upc': '4711421853422',
+          'description': 'android',
+          'statedQuantity':  11
+          // 'balance': 0,
+          // quantityScanned: 0
+        }
+      }
     })
   }
 
-  handleAndroidState(e) {
-    // console.log(e.target.value);
-    this.setState({
-      androidState: e.target.value
-    })
-  }
+
 
   // componentDidUpdate() {
   //   let totalScanned = parseInt(this.state.macBookState) + parseInt(this.state.androidState);
@@ -141,7 +176,7 @@ export default class InitiateReceipt extends Component {
     // console.log(parseInt(this.state.androidState));
     // console.log(this.state.currentUpc in this.state.upc);
     // totalScanned = {parseInt(this.state.macBookState) + parseInt(this.state.androidState)}
-
+    // console.log(this.state.upc);
     return (
       <div onKeyDown={this.barcode}>
         <MenuBar />
@@ -154,7 +189,7 @@ export default class InitiateReceipt extends Component {
                   <PartnerBasicInfo
                     partnerBasicInfo={this.state}
                     handleTextBoxChange={this.handleTextBoxChange}
-                    totalScanned = {this.state.upc.quantity}
+                    totalScanned = {this.state.upc[4800067450871].balance + this.state.upc[4711421853422].balance}
 
                   />
                   <ReceiptInfo
