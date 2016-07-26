@@ -7,6 +7,7 @@ import ReceiptInfo from './ReceiptInfo';
 
 let currentUpc = '';
 
+
 export default class InitiateReceipt extends Component {
   constructor(props){
     super(props);
@@ -36,7 +37,8 @@ export default class InitiateReceipt extends Component {
       currentUpc: '',
       upc: {
         '4800067450871': 'item1',
-        quantity: '2',
+        '4711421853422': 'item2',
+        quantity: 0,
         'a': 'item2'
       }
     };
@@ -53,18 +55,19 @@ export default class InitiateReceipt extends Component {
   }
 
   customMethod(e) {
-
     if (e.code !== 'Enter' && e.code !== 'ShiftLeft') {
-      let arr = ['4','8','0','0','6']
-
+      // currentUpc += e.key;
+      // console.log(currentUpc);
       this.setState({
         currentUpc: this.state.currentUpc += e.key
       })
     } else {
       if (this.state.currentUpc in this.state.upc) {
-        let quantity = parseInt(this.state.upc.quantity) + 1
+        let currentQty = this.state.upc.quantity += 1;
+        // console.log(this.state.upc.quantity);
         this.setState({
-          quantity: quantity
+          quantity:  currentQty, //this.state.upc.quantity += 1,
+          currentUpc: ''
         })
         console.log(this.state.upc.quantity)
       } else {
