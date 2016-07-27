@@ -83,25 +83,27 @@ export default class InitiateReceipt extends Component {
       if (this.state.currentUpc in this.state.upc) {
         let macbook =  this.state.upc[4800067450871];
         let android = this.state.upc[4711421853422];
-        if(this.state.currentUpc == android.upc){
-          android.balance++;
-          // console.log(this.state.upc.quantity);
+
+        if(this.state.currentUpc == macbook.upc){
+          macbook.quantityScanned++;
+
           this.setState({
-            balance:  android.balance,//this.state.upc.quantity += 1
-            currentUpc: ''
+            quantityScanned:  macbook.quantityScanned,
+            currentUpc: '',
+            balance: macbook.balance
           })
-          console.log(android.balance);
+          // console.log(macbook.quantityScanned);
+          // console.log(macbook.balance);
         }
-        else if(this.state.currentUpc == macbook.upc){
-          macbook.balance++;
-          // let total = this.state.totalScanned + currentQty;
-          // console.log(this.state.upc.quantity);
+        else if(this.state.currentUpc == android.upc){
+          android.quantityScanned++;
           this.setState({
-            balance:  macbook.balance,//this.state.upc.quantity += 1
-            currentUpc: ''
-            // totalScanned: total
+            quantityScanned:  android.quantityScanned,
+            currentUpc: '',
+            balance: android.balance
           })
-          console.log(macbook.balance);
+          // console.log(android.quantityScanned);
+          // console.log(android.balance);
         }
       } else {
           console.log('UPC is not found');
@@ -119,24 +121,32 @@ export default class InitiateReceipt extends Component {
   }
 
   handleMacbookChange(e) {
-      this.state.upc[4800067450871].balance = e.target.value;
-      this.setState({
-        balance: this.state.upc[4800067450871].balance
-      });
+    let macbook =  this.state.upc[4800067450871];
+    let android = this.state.upc[4711421853422];
+    macbook.quantityScanned = e.target.value;
+    macbook.balance = macbook.statedQuantity - macbook.quantityScanned;
+    this.setState({
+      quantityScanned: macbook.quantityScanned,
+      balance: macbook.balance
+    });
 
-   console.log(this.state.upc[4800067450871].balance);
+    console.log(macbook.quantityScanned);
   }
 
   handleAndroidState(e) {
-    this.state.upc[4711421853422].balance = e.target.value;
+    let macbook =  this.state.upc[4800067450871];
+    let android = this.state.upc[4711421853422];
+    android.quantityScanned = e.target.value;
+    android.balance = android.statedQuantity - android.quantityScanned;
     this.setState({
-      balance: this.state.upc[4711421853422].balance
+      quantityScanned: android.quantityScanned,
+      balance: android.balanc
     })
-    console.log(this.state.upc[4711421853422].balance);
+    console.log(android.quantityScanned);
   }
 
   // componentDidUpdate() {
-  //   let totalScanned = parseInt(this.state.macBookState) + parseInt(this.state.androidState);
+  //   let totalScanned = this.state.upc[4800067450871].balance)+ parseInt(this.state.upc[4711421853422].balance);
   //   this.setState({
   //     totalScanned: totalScanned
   //   })
@@ -174,7 +184,7 @@ export default class InitiateReceipt extends Component {
                   <PartnerBasicInfo
                     partnerBasicInfo={this.state}
                     handleTextBoxChange={this.handleTextBoxChange}
-                    totalScanned = {parseInt(this.state.upc[4800067450871].balance)+ parseInt(this.state.upc[4711421853422].balance)}
+                    totalScanned = {parseInt(this.state.upc[4800067450871].quantityScanned)+ parseInt(this.state.upc[4711421853422].quantityScanned)}
 
                   />
                   <ReceiptInfo
