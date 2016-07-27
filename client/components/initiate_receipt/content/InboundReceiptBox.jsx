@@ -54,7 +54,7 @@ export default class InitiateReceipt extends Component {
           'sku': '45447422',
           'upc': '4711421853422',
           'description': 'android',
-          'statedQuantity':  11,
+          'statedQuantity':  10,
           'balance': 0,
           quantityScanned: 0
         }
@@ -62,7 +62,7 @@ export default class InitiateReceipt extends Component {
     };
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
     this.handleMacbookChange = this.handleMacbookChange.bind(this);
-    // this.handleAndroidState = this.handleAndroidState.bind(this);
+    this.handleAndroidState = this.handleAndroidState.bind(this);
     this.customMethod = this.customMethod.bind(this);
     // this.updatedScanned = this.updatedScanned.bind(this);
     // this.barcode = this.barcode.bind(this);
@@ -112,13 +112,6 @@ export default class InitiateReceipt extends Component {
     }
   }
 
-  // componentDidUpdate(){
-  //   this.setState({
-  //     totalScanned: this.state.upc[4800067450871].balance + this.state.upc[4711421853422].balance
-  //   })
-  //
-  // }
-
   handleTextBoxChange(e) {
     this.setState({
       timeArrived: e.target.value
@@ -126,29 +119,21 @@ export default class InitiateReceipt extends Component {
   }
 
   handleMacbookChange(e) {
-    this.setState({
-      upc: {
-        '4800067450871' : {
-          'sku': '4548000674',
-          'upc': '4800067450871',
-          'description': '13" MacBook Pro 256GB',
-          'statedQuantity':  10,
-          'balance': e.target.value
-          // quantityScanned: 0
-        },
-        '4711421853422': {
-          'sku': '45447422',
-          'upc': '4711421853422',
-          'description': 'android',
-          'statedQuantity':  11
-          // 'balance': 0,
-          // quantityScanned: 0
-        }
-      }
-    })
+      this.state.upc[4800067450871].balance = e.target.value;
+      this.setState({
+        balance: this.state.upc[4800067450871].balance
+      });
+
+   console.log(this.state.upc[4800067450871].balance);
   }
 
-
+  handleAndroidState(e) {
+    this.state.upc[4711421853422].balance = e.target.value;
+    this.setState({
+      balance: this.state.upc[4711421853422].balance
+    })
+    console.log(this.state.upc[4711421853422].balance);
+  }
 
   // componentDidUpdate() {
   //   let totalScanned = parseInt(this.state.macBookState) + parseInt(this.state.androidState);
@@ -189,7 +174,7 @@ export default class InitiateReceipt extends Component {
                   <PartnerBasicInfo
                     partnerBasicInfo={this.state}
                     handleTextBoxChange={this.handleTextBoxChange}
-                    totalScanned = {this.state.upc[4800067450871].balance + this.state.upc[4711421853422].balance}
+                    totalScanned = {parseInt(this.state.upc[4800067450871].balance)+ parseInt(this.state.upc[4711421853422].balance)}
 
                   />
                   <ReceiptInfo
