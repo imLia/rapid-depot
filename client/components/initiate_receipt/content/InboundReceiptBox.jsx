@@ -84,20 +84,20 @@ export default class InitiateReceipt extends Component {
         let macbook =  this.state.upc[4800067450871];
         let android = this.state.upc[4711421853422];
         if(this.state.currentUpc == android.upc){
-          let currentQty = android.balance += 1;
+          android.balance++;
           // console.log(this.state.upc.quantity);
           this.setState({
-            balance:  currentQty,//this.state.upc.quantity += 1
+            balance:  android.balance,//this.state.upc.quantity += 1
             currentUpc: ''
           })
           console.log(android.balance);
         }
         else if(this.state.currentUpc == macbook.upc){
-          let currentQty = macbook.balance += 1;
+          macbook.balance++;
           // let total = this.state.totalScanned + currentQty;
           // console.log(this.state.upc.quantity);
           this.setState({
-            balance:  currentQty,//this.state.upc.quantity += 1
+            balance:  macbook.balance,//this.state.upc.quantity += 1
             currentUpc: ''
             // totalScanned: total
           })
