@@ -62,7 +62,7 @@ export default class PartnerBasicInfo extends Component {
               Excess
             </h4>
             <p>
-              {this.props.partnerBasicInfo.excess}
+              {this.props.totalExcess}
             </p>
           </div>
         </div>

@@ -35,7 +35,7 @@ export default class InitiateReceipt extends Component {
       currentDate: currentDate(),
       timeStarted: currentTime(),
       timeArrived: '7:00 A.M',
-      excess: 0,
+      totalExcess: 0,
       macBookState: 0,
       androidState: 0,
       totalScanned: 0,
@@ -46,17 +46,19 @@ export default class InitiateReceipt extends Component {
           'sku': '4548000674',
           'upc': '4800067450871',
           'description': '13" MacBook Pro 256GB',
-          'statedQuantity':  10,
+          'statedQuantity':  2,
           'balance': 0,
-          quantityScanned: 0
+          quantityScanned: 0,
+          excess: 0
         },
         '4711421853422': {
           'sku': '45447422',
           'upc': '4711421853422',
           'description': 'android',
-          'statedQuantity':  10,
+          'statedQuantity':  2,
           'balance': 0,
-          quantityScanned: 0
+          quantityScanned: 0,
+          excess: 0
         }
       }
     };
@@ -83,27 +85,33 @@ export default class InitiateReceipt extends Component {
       if (this.state.currentUpc in this.state.upc) {
         let macbook =  this.state.upc[4800067450871];
         let android = this.state.upc[4711421853422];
-
         if(this.state.currentUpc == macbook.upc){
           macbook.quantityScanned++;
-
-          this.setState({
-            quantityScanned:  macbook.quantityScanned,
-            currentUpc: '',
-            balance: macbook.balance
-          })
+          macbook.balance = macbook.statedQuantity - macbook.quantityScanned;
+          if(macbook.balance < 0){
+            macbook.excess  = macbook.balance
+            this.setState({
+              quantityScanned: macbook.quantityScanned,
+              balance: macbook.balance,
+              excess: macbook.excess
+            });
+          }
           // console.log(macbook.quantityScanned);
-          // console.log(macbook.balance);
+           console.log(macbook.balance);
         }
         else if(this.state.currentUpc == android.upc){
           android.quantityScanned++;
-          this.setState({
-            quantityScanned:  android.quantityScanned,
-            currentUpc: '',
-            balance: android.balance
-          })
+          android.balance = android.statedQuantity - android.quantityScanned;
+          if(android.balance < 0){
+            android.excess = android.balance;
+            this.setState({
+              quantityScanned: android.quantityScanned,
+              balance: android.balanc,
+              excess: android.excess
+            })
+          }
           // console.log(android.quantityScanned);
-          // console.log(android.balance);
+          console.log(android.balance);
         }
       } else {
           console.log('UPC is not found');
@@ -122,27 +130,44 @@ export default class InitiateReceipt extends Component {
 
   handleMacbookChange(e) {
     let macbook =  this.state.upc[4800067450871];
-    let android = this.state.upc[4711421853422];
     macbook.quantityScanned = e.target.value;
     macbook.balance = macbook.statedQuantity - macbook.quantityScanned;
-    this.setState({
-      quantityScanned: macbook.quantityScanned,
-      balance: macbook.balance
-    });
-
-    console.log(macbook.quantityScanned);
+    if(macbook.balance < 0){
+      macbook.excess  = macbook.balance
+      this.setState({
+        quantityScanned: macbook.quantityScanned,
+        balance: macbook.balance,
+        excess: macbook.excess
+      });
+    }
+    else{
+        this.setState({
+          quantityScanned: macbook.quantityScanned,
+          balance: macbook.balance,
+        });
+    }
+    console.log(macbook.excess);
   }
 
   handleAndroidState(e) {
-    let macbook =  this.state.upc[4800067450871];
     let android = this.state.upc[4711421853422];
     android.quantityScanned = e.target.value;
     android.balance = android.statedQuantity - android.quantityScanned;
-    this.setState({
+    if(android.balance < 0){
+      android.excess = android.balance;
+      this.setState({
+        quantityScanned: android.quantityScanned,
+        balance: android.balanc,
+        excess: android.excess
+      })
+    }
+    else{
+      this.setState({
       quantityScanned: android.quantityScanned,
-      balance: android.balanc
-    })
-    console.log(android.quantityScanned);
+      balance: android.balance
+      })
+    }
+    console.log(android.excess);
   }
 
   // componentDidUpdate() {
@@ -185,6 +210,7 @@ export default class InitiateReceipt extends Component {
                     partnerBasicInfo={this.state}
                     handleTextBoxChange={this.handleTextBoxChange}
                     totalScanned = {parseInt(this.state.upc[4800067450871].quantityScanned)+ parseInt(this.state.upc[4711421853422].quantityScanned)}
+                    totalExcess = {Math.abs(parseInt(this.state.upc[4800067450871].excess)+ parseInt(this.state.upc[4711421853422].excess))}
 
                   />
                   <ReceiptInfo
