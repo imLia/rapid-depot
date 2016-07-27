@@ -89,15 +89,21 @@ export default class InitiateReceipt extends Component {
           macbook.quantityScanned++;
           macbook.balance = macbook.statedQuantity - macbook.quantityScanned;
           if(macbook.balance < 0){
-            macbook.excess  = macbook.balance
+            macbook.excess  = macbook.balance;
             this.setState({
               quantityScanned: macbook.quantityScanned,
-              balance: macbook.balance,
               excess: macbook.excess
             });
+            macbook.balance = 0;
           }
+          // else {
+          //     this.setState({
+          //       quantityScanned: macbook.quantityScanned,
+          //       balance: macbook.balance,
+          //     });
+          // }
           // console.log(macbook.quantityScanned);
-           console.log(macbook.balance);
+          //  console.log(macbook.balance);
         }
         else if(this.state.currentUpc == android.upc){
           android.quantityScanned++;
@@ -106,12 +112,18 @@ export default class InitiateReceipt extends Component {
             android.excess = android.balance;
             this.setState({
               quantityScanned: android.quantityScanned,
-              balance: android.balanc,
               excess: android.excess
+            })
+            android.balance = 0;
+          }
+          else{
+            this.setState({
+            quantityScanned: android.quantityScanned,
+            balance: android.balance
             })
           }
           // console.log(android.quantityScanned);
-          console.log(android.balance);
+          // console.log(android.balance);
         }
       } else {
           console.log('UPC is not found');
@@ -136,9 +148,9 @@ export default class InitiateReceipt extends Component {
       macbook.excess  = macbook.balance
       this.setState({
         quantityScanned: macbook.quantityScanned,
-        balance: macbook.balance,
         excess: macbook.excess
       });
+      macbook.balance = 0;
     }
     else{
         this.setState({
@@ -146,7 +158,7 @@ export default class InitiateReceipt extends Component {
           balance: macbook.balance,
         });
     }
-    console.log(macbook.excess);
+    // console.log(macbook.excess);
   }
 
   handleAndroidState(e) {
@@ -160,6 +172,7 @@ export default class InitiateReceipt extends Component {
         balance: android.balanc,
         excess: android.excess
       })
+      android.balance = 0;
     }
     else{
       this.setState({
@@ -167,7 +180,7 @@ export default class InitiateReceipt extends Component {
       balance: android.balance
       })
     }
-    console.log(android.excess);
+    // console.log(android.excess);
   }
 
   // componentDidUpdate() {
