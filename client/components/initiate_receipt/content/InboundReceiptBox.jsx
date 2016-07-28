@@ -85,51 +85,50 @@ export default class InitiateReceipt extends Component {
       if (this.state.currentUpc in this.state.upc) {
         let macbook =  this.state.upc[4800067450871];
         let android = this.state.upc[4711421853422];
-        if(this.state.currentUpc == macbook.upc){
+        if(this.state.currentUpc == android.upc){
+          android.quantityScanned++;
+          android.balance = android.statedQuantity - android.quantityScanned;
+          if(android.balance < 0){
+              android.excess  = android.balance;
+              android.balance = 0;
+              this.setState({
+                currentUpc: '',
+                excess: android.excess
+              })
+            }
+          else{
+              this.setState({
+              balance: android.balance,
+              currentUpc: ''
+            })
+          }
+          console.log(android.balance);
+          // console.log(android.quantityScanned);
+        }
+        else if(this.state.currentUpc == macbook.upc){
           macbook.quantityScanned++;
           macbook.balance = macbook.statedQuantity - macbook.quantityScanned;
           if(macbook.balance < 0){
             macbook.excess  = macbook.balance;
-            this.setState({
-              quantityScanned: macbook.quantityScanned,
-              excess: macbook.excess
-            });
             macbook.balance = 0;
-          }
-          // else {
-          //     this.setState({
-          //       quantityScanned: macbook.quantityScanned,
-          //       balance: macbook.balance,
-          //     });
-          // }
-          // console.log(macbook.quantityScanned);
-          //  console.log(macbook.balance);
-        }
-        else if(this.state.currentUpc == android.upc){
-          android.quantityScanned++;
-          android.balance = android.statedQuantity - android.quantityScanned;
-          if(android.balance < 0){
-            android.excess = android.balance;
             this.setState({
-              quantityScanned: android.quantityScanned,
-              excess: android.excess
+              currentUpc: '',
+              excess: macbook.excess
             })
-            android.balance = 0;
           }
           else{
             this.setState({
-            quantityScanned: android.quantityScanned,
-            balance: android.balance
+            balance: macbook.balance,
+            currentUpc: ''
             })
           }
-          // console.log(android.quantityScanned);
-          // console.log(android.balance);
+          console.log(macbook.balance);
         }
       } else {
-          console.log('UPC is not found');
-          this.setState({
-            currentUpc: ''
-          })
+        console.log('UPC is not found');
+        this.setState({
+          currentUpc: ''
+        })
       }
     }
   }
@@ -152,7 +151,7 @@ export default class InitiateReceipt extends Component {
       });
       macbook.balance = 0;
     }
-    else{
+    else if(macbook.balance >= 0){
         this.setState({
           quantityScanned: macbook.quantityScanned,
           balance: macbook.balance,
