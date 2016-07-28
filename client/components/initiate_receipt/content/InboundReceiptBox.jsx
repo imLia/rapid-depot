@@ -12,7 +12,7 @@ export default class InitiateReceipt extends Component {
     super(props);
 
     let newDate = new Date();
-    function currentDate () {
+    function currentDate() {
       let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
         "September", "October", "November", "December"];
 
@@ -20,25 +20,27 @@ export default class InitiateReceipt extends Component {
     }
 
     function currentTime() {
-      let period = newDate.getHours() <= 12 ?  'A.M' : 'P.M';
-      let hoursOf12 = newDate.getHours() >= 12  ? newDate.getHours() - 12 : newDate.getHours();
-      let minutes = (newDate.getMinutes()< 10 ? '0':'') + newDate.getMinutes() ;
+      let period = newDate.getHours() < 12 ?  'A.M' : 'P.M';
+      let hoursOf12 = newDate.getHours() > 12  ? newDate.getHours() - 12 : newDate.getHours();
+      if(hoursOf12 == 0 ){
+        hoursOf12 = '12'
+      }
+      let hours = (hoursOf12 < 10  ? '0': '') + hoursOf12;
+      let minutes = (newDate.getMinutes() < 10 ? '0':'') + newDate.getMinutes() ;
 
-      return  hoursOf12 + ":" + minutes + " " + period;
+      return  hours + ":" + minutes  + " " + period;
     }
 
 
 
     this.state = {
-      partnerName: 'Payless',
-      poNumber: '1337123',
+      partnerName: 'Payless1',
+      poNumber: '133712345',
       currentDate: currentDate(),
-      timeStarted: currentTime(),
+      timeStart: currentTime(),
       timeArrived: '7:00 A.M',
-      totalExcess: 0,
       macBookState: 0,
       androidState: 0,
-      totalScanned: 0,
 
       currentUpc: '',
       upc: {
@@ -102,7 +104,7 @@ export default class InitiateReceipt extends Component {
               currentUpc: ''
             })
           }
-          console.log(android.balance);
+          // console.log(android.balance);
           // console.log(android.quantityScanned);
         }
         else if(this.state.currentUpc == macbook.upc){

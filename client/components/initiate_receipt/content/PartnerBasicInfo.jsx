@@ -10,12 +10,12 @@ export default class PartnerBasicInfo extends Component {
         <h4>P.O.#:</h4>
         <p>{this.props.partnerBasicInfo.poNumber}</p>
         <h4>Date:</h4>
-        <time>{this.props.partnerBasicInfo.currentDate}</time>
+        <date>{this.props.partnerBasicInfo.currentDate}</date>
         <fieldset>
           <label>
             Time Started
             <time>
-              {this.props.partnerBasicInfo.timeStarted}
+              {this.props.partnerBasicInfo.timeStart}
             </time>
           </label>
           <label>
