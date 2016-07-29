@@ -15,7 +15,6 @@ export default class InitiateReceipt extends Component {
     function currentDate() {
       let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
         "September", "October", "November", "December"];
-
       return monthNames[newDate.getMonth()] + " " + newDate.getDate()+ ", " + newDate.getFullYear();
     }
 
@@ -30,7 +29,6 @@ export default class InitiateReceipt extends Component {
 
       return  hours + ":" + minutes  + " " + period;
     }
-
 
 
     this.state = {
@@ -68,8 +66,6 @@ export default class InitiateReceipt extends Component {
     this.handleMacbookChange = this.handleMacbookChange.bind(this);
     this.handleAndroidState = this.handleAndroidState.bind(this);
     this.customMethod = this.customMethod.bind(this);
-    // this.updatedScanned = this.updatedScanned.bind(this);
-    // this.barcode = this.barcode.bind(this);
   }
 
   componentDidMount(){
@@ -84,9 +80,9 @@ export default class InitiateReceipt extends Component {
         currentUpc: this.state.currentUpc += e.key
       })
     } else {
+      let macbook =  this.state.upc[4800067450871];
+      let android = this.state.upc[4711421853422];
       if (this.state.currentUpc in this.state.upc) {
-        let macbook =  this.state.upc[4800067450871];
-        let android = this.state.upc[4711421853422];
         if(this.state.currentUpc == android.upc){
           android.quantityScanned++;
           android.balance = android.statedQuantity - android.quantityScanned;
@@ -94,18 +90,17 @@ export default class InitiateReceipt extends Component {
               android.excess  = android.balance;
               android.balance = 0;
               this.setState({
-                currentUpc: '',
+                // currentUpc: '',
                 excess: android.excess
               })
             }
           else{
               this.setState({
               balance: android.balance,
-              currentUpc: ''
+              // currentUpc: ''
             })
           }
-          // console.log(android.balance);
-          // console.log(android.quantityScanned);
+          console.log(android.quantityScanned);
         }
         else if(this.state.currentUpc == macbook.upc){
           macbook.quantityScanned++;
@@ -114,25 +109,27 @@ export default class InitiateReceipt extends Component {
             macbook.excess  = macbook.balance;
             macbook.balance = 0;
             this.setState({
-              currentUpc: '',
+              // currentUpc: '',
               excess: macbook.excess
             })
           }
           else{
             this.setState({
             balance: macbook.balance,
-            currentUpc: ''
+            // currentUpc: ''
             })
           }
-          console.log(macbook.balance);
+          console.log(macbook.quantityScanned);
         }
       } else {
         console.log('UPC is not found');
         this.setState({
-          currentUpc: ''
+          // currentUpc: ''
         })
       }
+      this.state.currentUpc = '';
     }
+
   }
 
   handleTextBoxChange(e) {
@@ -159,7 +156,6 @@ export default class InitiateReceipt extends Component {
           balance: macbook.balance,
         });
     }
-    // console.log(macbook.excess);
   }
 
   handleAndroidState(e) {
@@ -181,15 +177,7 @@ export default class InitiateReceipt extends Component {
       balance: android.balance
       })
     }
-    // console.log(android.excess);
   }
-
-  // componentDidUpdate() {
-  //   let totalScanned = this.state.upc[4800067450871].balance)+ parseInt(this.state.upc[4711421853422].balance);
-  //   this.setState({
-  //     totalScanned: totalScanned
-  //   })
-  // }
 
   // barcode(e) {
   //   let code = (e.keyCode ? e.keyCode : e.which);
@@ -206,11 +194,6 @@ export default class InitiateReceipt extends Component {
   //   }
   // }
   render() {
-    // console.log(parseInt(this.state.macBookState));
-    // console.log(parseInt(this.state.androidState));
-    // console.log(this.state.currentUpc in this.state.upc);
-    // totalScanned = {parseInt(this.state.macBookState) + parseInt(this.state.androidState)}
-    // console.log(this.state.upc);
     return (
       <div onKeyDown={this.barcode}>
         <MenuBar />
