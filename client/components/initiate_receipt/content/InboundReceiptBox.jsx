@@ -72,6 +72,7 @@ export default class InitiateReceipt extends Component {
     document.body.addEventListener('keydown', this.customMethod)
   }
 
+
   customMethod(e) {
     if (e.code !== 'Enter' && e.code !== 'ShiftLeft') {
       // currentUpc += e.key;
@@ -194,6 +195,8 @@ export default class InitiateReceipt extends Component {
   //   }
   // }
   render() {
+    // this.state.upc[4800067450871].balance = this.state.upc[4800067450871].statedQuantity;
+    // this.state.upc[4711421853422].balance = this.state.upc[4711421853422].statedQuantity;
     return (
       <div onKeyDown={this.barcode}>
         <MenuBar />
